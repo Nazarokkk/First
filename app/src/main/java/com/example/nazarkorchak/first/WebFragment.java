@@ -22,7 +22,7 @@ public class WebFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = (View)inflater.inflate(R.layout.webfragment, container, false);
+        View view = inflater.inflate(R.layout.webfragment, container, false);
 
         WebView myWebView = (WebView) view.findViewById(R.id.webView);
         myWebView.getSettings().setJavaScriptEnabled(true);
@@ -57,7 +57,7 @@ public class WebFragment extends Fragment {
 
                 SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-               // editor.putString("access_token",accessToken);
+                editor.putString("access_token",accessToken);
                 editor.putString("expires_in",expiresIn);
                 editor.putString("user_id",userId);
                 editor.commit();
