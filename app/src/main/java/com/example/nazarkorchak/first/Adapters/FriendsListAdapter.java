@@ -36,6 +36,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             viewHolder.name.setText("Item " + i);
+            viewHolder.icon.setImageResource(R.drawable.img);
         }
 
         @Override
