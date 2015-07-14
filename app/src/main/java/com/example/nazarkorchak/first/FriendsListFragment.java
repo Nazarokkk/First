@@ -14,7 +14,7 @@ import com.example.nazarkorchak.first.Adapters.FriendsListAdapter;
 import java.util.ArrayList;
 
 
-public class FriendsListFragment extends Fragment{
+public class FriendsListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -47,7 +47,7 @@ public class FriendsListFragment extends Fragment{
 
         ArrayList<String> mDataSet = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            mDataSet.add( "item" + i);
+            mDataSet.add("item" + i);
         }
         return mDataSet;
     }
