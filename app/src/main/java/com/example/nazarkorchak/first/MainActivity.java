@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-
 
 public class MainActivity extends ActionBarActivity {
 
@@ -19,9 +17,9 @@ public class MainActivity extends ActionBarActivity {
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
-        Fragment fragment = new Fragment();
+        Fragment fragment;
 
-        if(sharedPref.getString("access_token", "nothing").equals("nothing"))
+        if(sharedPref.getString("access_token", "nothing").equals("nothing")) // TODO move hardcoded strings to constants
         {
             fragment = new WebFragment();
         }
@@ -34,9 +32,6 @@ public class MainActivity extends ActionBarActivity {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.FragmentContainer, fragment).commit();
-
-
-
     }
 
 

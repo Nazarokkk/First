@@ -15,6 +15,8 @@ import android.webkit.WebViewClient;
 public class WebFragment extends Fragment {
 
     private static final String TAG = "WebFragment";
+
+    // TODO use constants not variables
     String mURL = "https://oauth.vk.com/authorize?client_id=4980525&redirect_uri=https://oauth.vk.com/blank.html&scope=friends,video,offline&revoke=1&display=mobile&response_type=token ";
     String REDIRECT_URI = "access_token";
 
@@ -39,7 +41,7 @@ public class WebFragment extends Fragment {
 
             Log.d(TAG,url);
 
-            if(url.contains(REDIRECT_URI)) {
+            if(url.contains(REDIRECT_URI)) {  // TODO use startWith not contains
 
                 url = url.replace("#","?");
 
@@ -57,12 +59,12 @@ public class WebFragment extends Fragment {
 
                 SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("access_token",accessToken);
+                editor.putString("access_token",accessToken); // TODO extract preference KEYs to constants
                 editor.putString("expires_in",expiresIn);
                 editor.putString("user_id",userId);
                 editor.commit();
 
-                Log.d("EDITOR", "TOKEN_IN_EDITOR = " + sharedPref.getString("access_token", "nothing"));
+                Log.d("EDITOR", "TOKEN_IN_EDITOR = " + sharedPref.getString("access_token", "nothing")); // TODO extract preference KEYs to constants
                 Log.d("EDITOR", "TIME_IN_EDITOR = " + sharedPref.getString("expires_in","nothing"));
                 Log.d("EDITOR", "ID_IN_EDITOR = " + sharedPref.getString("user_id","nothing"));
 
