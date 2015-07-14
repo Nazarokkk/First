@@ -18,9 +18,9 @@ public class WebFragment extends Fragment {
 
     private static final String TAG = "WebFragment";
 
-    // TODO use constants not variables
-    String mURL = "https://oauth.vk.com/authorize?client_id=4980525&redirect_uri=https://oauth.vk.com/blank.html&scope=friends,photos&revoke=1&display=mobile&response_type=token ";
-    String REDIRECT_URI = "access_token";
+
+    final String mURL = "https://oauth.vk.com/authorize?client_id=4980525&redirect_uri=https://oauth.vk.com/blank.html&scope=friends,photos&revoke=1&display=mobile&response_type=token ";
+    final String REDIRECT_URI = "access_token";
 
 
     @Override
@@ -44,7 +44,7 @@ public class WebFragment extends Fragment {
 
             Log.d(TAG, url);
 
-            if (url.contains(REDIRECT_URI)) {  // TODO use startWith not contains
+            if (url.startsWith(REDIRECT_URI)) {
 
                 url = url.replace("#", "?");
 

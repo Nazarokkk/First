@@ -46,6 +46,8 @@ public class MainActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
     }
 
+
+
     @Override
     public void onStop() {
         EventBus.getDefault().unregister(this);
