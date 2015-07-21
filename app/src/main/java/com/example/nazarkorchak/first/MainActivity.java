@@ -11,6 +11,7 @@ import de.greenrobot.event.EventBus;
 
 public class MainActivity extends ActionBarActivity {
 
+    //final String getFriends = "https://api.vk.com/method/friends.get?user_id=134487854&order=random&fields=first_name,last_name,photo_100&version=5.34";
 
     FragmentManager fragmentManager = getFragmentManager();
     Fragment fragment;
@@ -34,7 +35,6 @@ public class MainActivity extends ActionBarActivity {
             fragment = new WebFragment();
         } else {
             fragment = new FriendsListFragment();
-
         }
 
         fragmentManager.beginTransaction()
@@ -46,7 +46,9 @@ public class MainActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
     }
 
+    public void onEvent(LoadFriendsData event) {
 
+    }
 
     @Override
     public void onStop() {

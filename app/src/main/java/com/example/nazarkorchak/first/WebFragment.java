@@ -19,7 +19,7 @@ public class WebFragment extends Fragment {
     private static final String TAG = "WebFragment";
 
 
-    final String mURL = "https://oauth.vk.com/authorize?client_id=4980525&redirect_uri=https://oauth.vk.com/blank.html&scope=friends,photos&revoke=1&display=mobile&response_type=token ";
+    final String mURL = "https://oauth.vk.com/authorize?client_id=4980525&redirect_uri=https://oauth.vk.com/blank.html&scope=friends,photos,offline&revoke=1&display=mobile&response_type=token ";
     final String REDIRECT_URI = "access_token";
 
 
@@ -44,7 +44,7 @@ public class WebFragment extends Fragment {
 
             Log.d(TAG, url);
 
-            if (url.startsWith(REDIRECT_URI)) {
+            if (url.contains(REDIRECT_URI)) {
 
                 url = url.replace("#", "?");
 
@@ -66,11 +66,6 @@ public class WebFragment extends Fragment {
                 editor.putString("expires_in", expiresIn);
                 editor.putString("user_id", userId);
                 editor.commit();
-
-                Log.d("EDITOR", "TOKEN_IN_EDITOR = " + sharedPref.getString("access_token", "nothing")); // TODO extract preference KEYs to constants
-                Log.d("EDITOR", "TIME_IN_EDITOR = " + sharedPref.getString("expires_in", "nothing"));
-                Log.d("EDITOR", "ID_IN_EDITOR = " + sharedPref.getString("user_id", "nothing"));
-
 
                 EventBus.getDefault().post(new MessageEvent());
 

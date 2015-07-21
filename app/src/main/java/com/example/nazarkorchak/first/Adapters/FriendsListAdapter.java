@@ -1,6 +1,7 @@
 package com.example.nazarkorchak.first.Adapters;
 
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.nazarkorchak.first.Friend;
 import com.example.nazarkorchak.first.R;
 
 import java.util.List;
@@ -15,38 +19,37 @@ import java.util.List;
 
 public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.ViewHolder> {
 
-        private List<String> records;
+        private List<Friend> friendList;
 
-        public FriendsListAdapter(List<String> records) {
-            this.records = records;
+        public FriendsListAdapter(List<Friend> friendList) {
+            this.friendList = friendList;
         }
 
-        /**
-         * ???????? ????? View ? ViewHolder ???????? ??????, ??????? ???????????? ????? ??????????????????.
-         */
+
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item, viewGroup, false);
             return new ViewHolder(v);
         }
 
-        /**
-         * ?????????? ???????? View ??????? ?? ???????? ?????? ? ??????? i
-         */
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            viewHolder.name.setText("Item " + i);
+            Friend friend = friendList.get(i);
+            viewHolder.name.setText(friend.getFirstName());
             viewHolder.icon.setImageResource(R.drawable.img);
+
+          //  Glide.with(this)
+              //      .load("http://nuuneoi.com/uploads/source/playstore/cover.jpg")
+                 //   .diskCacheStrategy(DiskCacheStrategy.ALL)
+                 //   .into(viewHolder.icon);
         }
 
         @Override
         public int getItemCount() {
-            return records.size();
+            return friendList.size();
         }
 
-        /**
-         * ?????????? ?????? ViewHolder, ????????? ?????? ?? ???????.
-         */
+
         class ViewHolder extends RecyclerView.ViewHolder {
             private TextView name;
             private ImageView icon;
