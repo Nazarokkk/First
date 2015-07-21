@@ -46,10 +46,6 @@ public class MainActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
     }
 
-    public void onEvent(LoadFriendsData event) {
-
-    }
-
     @Override
     public void onStop() {
         EventBus.getDefault().unregister(this);
