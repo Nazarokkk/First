@@ -1,8 +1,6 @@
 package com.example.nazarkorchak.first;
 
 
-import java.util.List;
-
 public class MResponse {
     private int count;
     private MySmallResponse response;

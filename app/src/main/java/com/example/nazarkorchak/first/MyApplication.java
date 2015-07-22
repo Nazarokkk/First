@@ -1,8 +1,6 @@
 package com.example.nazarkorchak.first;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.nazarkorchak.first.api.api;
@@ -20,6 +18,7 @@ public class MyApplication extends Application
     private List<Friend> friendList;
 
     api myApi;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -44,19 +43,18 @@ public class MyApplication extends Application
         mMap.put("fields","photo_100");
         mMap.put("version","5.34");
 
-        MResponse bigResponse = myApi.getFriendList(mMap);
-        MySmallResponse mySmallResponse = bigResponse.getResponse();
-        List<Friend> list = mySmallResponse.getItem();
+       // MResponse bigResponse = myApi.getFriendList(mMap);
+        MySmallResponse mySmallResponse = myApi.getFriendList(mMap);
+        friendList = mySmallResponse.getResponse();
 
-
-        Log.d("List",list.get(0).toString());
+        EventBus.getDefault().post(new LoadFriendsData(friendList));
 
 
     }
 
     @Override
     public void onTerminate() {
-        super.onTerminate();
         EventBus.getDefault().unregister(this);
+        super.onTerminate();
     }
 }

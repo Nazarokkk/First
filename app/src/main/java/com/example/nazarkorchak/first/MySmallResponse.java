@@ -5,7 +5,7 @@ import java.util.List;
 public class MySmallResponse {
 
     private int count;
-    private List<Friend> item;
+    private List<Friend> response;
 
     public int getCount() {
         return count;
@@ -15,11 +15,11 @@ public class MySmallResponse {
         this.count = count;
     }
 
-    public List<Friend> getItem() {
-        return item;
+    public List<Friend> getResponse() {
+        return response;
     }
 
-    public void setItem(List<Friend> item) {
-        this.item = item;
+    public void setResponse(List<Friend> response) {
+        this.response = response;
     }
 }

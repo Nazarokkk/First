@@ -2,23 +2,22 @@ package com.example.nazarkorchak.first.Adapters;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.nazarkorchak.first.Friend;
 import com.example.nazarkorchak.first.R;
 
 import java.util.List;
 
 
-public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.ViewHolder> {
+public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<Friend> friendList;
     private Context context;
@@ -38,14 +37,23 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Friend friend = friendList.get(i);
-        viewHolder.name.setText(friend.getFirstName());
-        viewHolder.icon.setImageResource(R.drawable.img);
+        viewHolder.name.setText(friend.getFirst_name() + " " + friend.getLast_name());
+        Glide.with(context).load(friend.getPhoto_100()).into(viewHolder.icon);
+
+        viewHolder.name.setOnClickListener(this);
+        viewHolder.icon.setOnClickListener(this);
 
     }
 
+
     @Override
     public int getItemCount() {
-        return friendList.size();
+        return (null != friendList ? friendList.size() : 0);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(context,"Click",Toast.LENGTH_LONG).show();
     }
 
 
@@ -58,5 +66,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
             name = (TextView) itemView.findViewById(R.id.recyclerViewItemName);
             icon = (ImageView) itemView.findViewById(R.id.recyclerViewItemIcon);
         }
+
+
     }
 }

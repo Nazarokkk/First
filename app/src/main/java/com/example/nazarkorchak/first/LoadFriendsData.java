@@ -5,13 +5,12 @@ import java.util.List;
 
 public class LoadFriendsData {
 
-    private List<Friend> listFriend;
+    public List<Friend> listFriend;
 
-    public List<Friend> getListFriend() {
-        return listFriend;
-    }
+    public LoadFriendsData(){}
 
-    public void setListFriend(List<Friend> listFriend) {
+    public LoadFriendsData(List<Friend> listFriend) {
         this.listFriend = listFriend;
     }
+
 }

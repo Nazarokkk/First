@@ -2,45 +2,45 @@ package com.example.nazarkorchak.first;
 
 public class Friend {
 
-    private String firstName,lastName,Photo;
-    private int userID;
+    private String first_name,last_name,photo_100;
+    private int user_id;
 
-    public Friend(String firstName, String lastName, String photo, int userID) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        Photo = photo;
-        this.userID = userID;
+    public Friend(String first_name, String last_name, String photo_100, int user_id) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.photo_100 = photo_100;
+        this.user_id = user_id;
     }
 
-    public int getUserID() {
-        return userID;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
-    public String getPhoto() {
-        return Photo;
+    public String getPhoto_100() {
+        return photo_100;
     }
 
-    public void setPhoto(String Photo) {
-        this.Photo = Photo;
+    public void setPhoto_100(String photo_100) {
+        this.photo_100 = photo_100;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }
