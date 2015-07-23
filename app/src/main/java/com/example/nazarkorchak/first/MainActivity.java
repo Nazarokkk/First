@@ -7,11 +7,18 @@ import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
+import com.example.nazarkorchak.first.events.AlbumEvent;
+import com.example.nazarkorchak.first.events.MessageEvent;
+import com.example.nazarkorchak.first.fragments.AlbumFragment;
+import com.example.nazarkorchak.first.fragments.FriendsListFragment;
+import com.example.nazarkorchak.first.fragments.WebFragment;
+
 import de.greenrobot.event.EventBus;
 
 public class MainActivity extends ActionBarActivity {
 
     //final String getFriends = "https://api.vk.com/method/friends.get?user_id=134487854&order=random&fields=first_name,last_name,photo_100&version=5.34";
+    //final String getAlbums = "https://api.vk.com/method/photos.getAlbums?owner_id=134487854&need_system=1&need_covers=1&v=5.34";
 
     FragmentManager fragmentManager = getFragmentManager();
     Fragment fragment;
@@ -44,6 +51,12 @@ public class MainActivity extends ActionBarActivity {
 
     public void onEvent(MessageEvent event) {
         getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
+    }
+
+    public void onEvent(AlbumEvent event) {
+        getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new AlbumFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

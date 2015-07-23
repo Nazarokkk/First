@@ -1,4 +1,4 @@
-package com.example.nazarkorchak.first;
+package com.example.nazarkorchak.first.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.example.nazarkorchak.first.R;
+import com.example.nazarkorchak.first.events.MessageEvent;
 
 import de.greenrobot.event.EventBus;
 
@@ -27,7 +30,7 @@ public class WebFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.webfragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
         WebView myWebView = (WebView) view.findViewById(R.id.webView);
         myWebView.getSettings().setJavaScriptEnabled(true);

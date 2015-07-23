@@ -1,4 +1,4 @@
-package com.example.nazarkorchak.first;
+package com.example.nazarkorchak.first.model;
 
 public class Friend {
 

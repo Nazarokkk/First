@@ -1,4 +1,6 @@
-package com.example.nazarkorchak.first;
+package com.example.nazarkorchak.first.responses;
+
+import com.example.nazarkorchak.first.model.Friend;
 
 import java.util.List;
 
