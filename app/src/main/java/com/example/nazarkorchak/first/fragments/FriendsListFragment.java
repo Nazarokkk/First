@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.nazarkorchak.first.Adapters.FriendsListAdapter;
 import com.example.nazarkorchak.first.R;
+import com.example.nazarkorchak.first.events.FriendsListResponse;
 import com.example.nazarkorchak.first.events.LoadFriendsData;
 import com.example.nazarkorchak.first.model.Friend;
 
@@ -41,39 +42,24 @@ public class FriendsListFragment extends Fragment {
         EventBus.getDefault().post(new LoadFriendsData());
     }
 
-    public void onEventAsync(LoadFriendsData event) {
-
-        if(event.listFriend != null) {
-
-            friendList.addAll(event.listFriend);
-
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mAdapter.notifyDataSetChanged();
-                }
-            });
+    public void onEventMainThred(FriendsListResponse event) {
+        if (event.getListFriend() != null) {
+            friendList.addAll(event.getListFriend());
+            // TODO change data in adapter
+            mAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = (View) inflater.inflate(R.layout.fragment_friend_list, container, false);
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-
-
         mRecyclerView.setHasFixedSize(true);
-
-
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new FriendsListAdapter(friendList,getActivity());
+        mAdapter = new FriendsListAdapter(friendList, getActivity());
         mRecyclerView.setAdapter(mAdapter);
-
         return view;
     }
 

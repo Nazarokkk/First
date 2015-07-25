@@ -4,7 +4,7 @@ import com.example.nazarkorchak.first.model.Friend;
 
 import java.util.List;
 
-public class MySmallResponse {
+public class LoadFriendsResponse {
 
     private int count;
     private List<Friend> response;
