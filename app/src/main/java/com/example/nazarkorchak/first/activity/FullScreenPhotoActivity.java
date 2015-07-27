@@ -3,9 +3,11 @@ package com.example.nazarkorchak.first.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.nazarkorchak.first.Adapters.PhotoPagerAdapter;
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.SendImagesEvent;
 import com.example.nazarkorchak.first.model.Photo;
@@ -16,43 +18,20 @@ import de.greenrobot.event.EventBus;
 
 public class FullScreenPhotoActivity extends Activity {
 
-    ArrayList<Photo> photoList = new ArrayList<Photo>();
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().registerSticky(this);
-    }
-
-    public void onEvent(SendImagesEvent event) {
-        photoList.addAll(event.photoList);
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_photo);
 
-        ImageView imageView = (ImageView) findViewById(R.id.full_screen_photo);
-
-
         int photoPosition = getIntent().getIntExtra("position", -1);
+        ArrayList<String> photoList = getIntent().getStringArrayListExtra("list");
 
-       // ArrayList<Photo> photoList = (ArrayList<Photo>) getIntent().getSerializableExtra("imageList");
 
-        Glide.with(this).load(photoList.get(photoPosition).getPhoto_604()).into(imageView);
-        // imageView.setImageResource(R.drawable.img);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        PhotoPagerAdapter ssAdapter = new PhotoPagerAdapter(this,photoList);
+        viewPager.setAdapter(ssAdapter);
+        viewPager.setCurrentItem(photoPosition,true);
 
-    }
 
-    @Override
-    public void onStop() {
-        EventBus.getDefault().unregister(this);
-        super.onStop();
     }
 }

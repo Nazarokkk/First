@@ -12,4 +12,5 @@ public class Photo {
     public void setPhoto_604(String photo_604) {
         this.photo_604 = photo_604;
     }
+
 }

@@ -43,8 +43,6 @@ public class PhotoFrament extends Fragment {
         if (event.listPhoto != null) {
 
             imageList.addAll(event.listPhoto);
-
-
             adapter.notifyDataSetChanged();
 
         }
@@ -67,11 +65,14 @@ public class PhotoFrament extends Fragment {
                                     int position, long id) {
 
                 Intent intent = new Intent(getActivity(), FullScreenPhotoActivity.class);
-                //intent.putExtra("photo",imageList.get(position).getPhoto_604());
 
-                EventBus.getDefault().post(new SendImagesEvent(imageList));
+                ArrayList<String> list = new ArrayList<String>();
+                for (int i = 0; i < imageList.size(); i++)
+                {
+                    list.add(imageList.get(i).getPhoto_604());
+                }
 
-                //intent.putExtra("imageList",imageList);
+                intent.putStringArrayListExtra("list", list);
                 intent.putExtra("position", position);
                 startActivity(intent);
             }

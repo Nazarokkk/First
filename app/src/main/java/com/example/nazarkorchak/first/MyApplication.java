@@ -64,8 +64,6 @@ public class MyApplication extends Application {
         FriendsListResponse friendsListResponse = myApi.getFriendList(mMap);
         List<Friend> friendList = friendsListResponse.getResponse();
 
-        Log.e("LOG",friendList.get(0).toString());
-
         EventBus.getDefault().post(new LoadFriendsData(friendList));
 
     }
