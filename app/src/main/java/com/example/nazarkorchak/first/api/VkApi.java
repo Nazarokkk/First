@@ -1,19 +1,25 @@
 package com.example.nazarkorchak.first.api;
 
-import com.example.nazarkorchak.first.responses.BigAlbumResponse;
-import com.example.nazarkorchak.first.responses.LoadFriendsResponse;
+import com.example.nazarkorchak.first.responses.AlbumResponse;
+import com.example.nazarkorchak.first.responses.FriendsListResponse;
+import com.example.nazarkorchak.first.responses.PhotosResponse;
 
 import java.util.Map;
 
 import retrofit.http.GET;
 import retrofit.http.QueryMap;
 
+
 public interface VkApi {
 
     @GET("/method/friends.get")
-    LoadFriendsResponse getFriendList(@QueryMap Map<String, String> queryMap);
+    FriendsListResponse getFriendList(@QueryMap Map<String, String> queryMap);
 
     @GET("/method/photos.getAlbums")
-    BigAlbumResponse getAlbums(@QueryMap Map<String, String> queryMap);
+    AlbumResponse getAlbums(@QueryMap Map<String, String> queryMap);
+
+    @GET("/method/photos.get")
+    PhotosResponse getPhotos(@QueryMap Map<String, String> queryMap);
+
 
 }

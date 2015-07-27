@@ -2,8 +2,9 @@ package com.example.nazarkorchak.first.model;
 
 public class Friend {
 
-    //FIXME fy beka-kaka!!!
-    private String first_name, last_name, photo_100;
+    private String first_name;
+    private String last_name;
+    private String photo_100;
     private int user_id;
 
     public Friend(String first_name, String last_name, String photo_100, int user_id) {

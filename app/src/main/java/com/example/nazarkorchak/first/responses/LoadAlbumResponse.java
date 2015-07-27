@@ -5,7 +5,7 @@ import com.example.nazarkorchak.first.model.AlbumImage;
 
 import java.util.List;
 
-public class SmallAlbumResponse {
+public class LoadAlbumResponse {
     private int count;
     private List<AlbumImage> items;
 

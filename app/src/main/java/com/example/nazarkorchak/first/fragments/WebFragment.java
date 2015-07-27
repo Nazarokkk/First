@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.MessageEvent;
+import com.example.nazarkorchak.first.model.TokenHolder;
 
 import de.greenrobot.event.EventBus;
 
@@ -69,6 +70,11 @@ public class WebFragment extends Fragment {
                 editor.putString("expires_in", expiresIn);
                 editor.putString("user_id", userId);
                 editor.commit();
+
+
+
+                TokenHolder.setUserID(getActivity(), userId);
+                TokenHolder.setToken(getActivity(), accessToken);
 
                 EventBus.getDefault().post(new MessageEvent());
 

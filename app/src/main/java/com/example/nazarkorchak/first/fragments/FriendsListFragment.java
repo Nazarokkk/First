@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.nazarkorchak.first.Adapters.FriendsListAdapter;
 import com.example.nazarkorchak.first.R;
-import com.example.nazarkorchak.first.events.FriendsListResponse;
+import com.example.nazarkorchak.first.events.FriendsEvent;
 import com.example.nazarkorchak.first.events.LoadFriendsData;
 import com.example.nazarkorchak.first.model.Friend;
 
@@ -35,16 +35,15 @@ public class FriendsListFragment extends Fragment {
         super.onAttach(activity);
         EventBus.getDefault().register(this);
     }
+        @Override
+        public void onStart () {
+            super.onStart();
+            EventBus.getDefault().post(new FriendsEvent());
+        }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().post(new LoadFriendsData());
-    }
-
-    public void onEventMainThred(FriendsListResponse event) {
-        if (event.getListFriend() != null) {
-            friendList.addAll(event.getListFriend());
+    public void onEventMainThread(LoadFriendsData event) {
+        if (event.friendList != null) {
+            friendList.addAll(event.friendList);
             // TODO change data in adapter
             mAdapter.notifyDataSetChanged();
         }
