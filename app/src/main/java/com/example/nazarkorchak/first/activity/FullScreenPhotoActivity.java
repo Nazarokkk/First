@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.nazarkorchak.first.R;
-import com.example.nazarkorchak.first.events.SendImages;
+import com.example.nazarkorchak.first.events.SendImagesEvent;
 import com.example.nazarkorchak.first.model.Photo;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class FullScreenPhotoActivity extends Activity {
         EventBus.getDefault().registerSticky(this);
     }
 
-    public void onEvent(SendImages event) {
+    public void onEvent(SendImagesEvent event) {
         photoList.addAll(event.photoList);
         this.runOnUiThread(new Runnable() {
             @Override

@@ -14,7 +14,7 @@ import com.example.nazarkorchak.first.Adapters.PhotoAdapter;
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.activity.FullScreenPhotoActivity;
 import com.example.nazarkorchak.first.events.LoadPhotoData;
-import com.example.nazarkorchak.first.events.SendImages;
+import com.example.nazarkorchak.first.events.SendImagesEvent;
 import com.example.nazarkorchak.first.model.Photo;
 
 import java.util.ArrayList;
@@ -69,7 +69,7 @@ public class PhotoFrament extends Fragment {
                 Intent intent = new Intent(getActivity(), FullScreenPhotoActivity.class);
                 //intent.putExtra("photo",imageList.get(position).getPhoto_604());
 
-                EventBus.getDefault().post(new SendImages(imageList));
+                EventBus.getDefault().post(new SendImagesEvent(imageList));
 
                 //intent.putExtra("imageList",imageList);
                 intent.putExtra("position", position);

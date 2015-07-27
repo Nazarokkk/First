@@ -42,7 +42,8 @@ public class MyApplication extends Application {
         EventBus.getDefault().register(this);
 
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("https://VkApi.vk.com")
+                .setEndpoint("https://api.vk.com")
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
 
         myApi = restAdapter.create(VkApi.class);

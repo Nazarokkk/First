@@ -5,11 +5,11 @@ import com.example.nazarkorchak.first.model.Photo;
 import java.util.List;
 
 
-public class SendImages {
+public class SendImagesEvent {
 
     public List<Photo> photoList;
 
-    public SendImages(List<Photo> photoList) {
+    public SendImagesEvent(List<Photo> photoList) {
         this.photoList = photoList;
     }
 }
