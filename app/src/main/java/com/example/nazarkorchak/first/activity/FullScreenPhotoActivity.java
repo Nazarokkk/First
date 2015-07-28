@@ -4,6 +4,7 @@ package com.example.nazarkorchak.first.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 import de.greenrobot.event.EventBus;
 
-public class FullScreenPhotoActivity extends Activity {
+public class FullScreenPhotoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

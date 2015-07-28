@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import com.example.nazarkorchak.first.Adapters.FriendsListAdapter;
 import com.example.nazarkorchak.first.R;
@@ -59,6 +60,7 @@ public class FriendsListFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new FriendsListAdapter(friendList, getActivity());
         mRecyclerView.setAdapter(mAdapter);
+
         return view;
     }
 
