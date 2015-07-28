@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.nazarkorchak.first.CircleTransform;
 import com.example.nazarkorchak.first.events.AlbumEvent;
 import com.example.nazarkorchak.first.model.Friend;
 import com.example.nazarkorchak.first.R;
@@ -41,7 +42,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Friend friend = friendList.get(i);
         viewHolder.name.setText(friend.getFirst_name() + " " + friend.getLast_name());
-        Glide.with(context).load(friend.getPhoto_100()).into(viewHolder.icon);
+        Glide.with(context).load(friend.getPhoto_100()).transform(new CircleTransform(context)).into(viewHolder.icon);
 
         viewHolder.setClickListener(new ItemClickListener() {
             @Override
