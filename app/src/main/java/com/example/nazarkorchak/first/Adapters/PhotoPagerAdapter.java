@@ -27,8 +27,10 @@ public class PhotoPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup ssContainer, int mPosition) {
         ImageView imageView = new ImageView(context);
         imageView.setPadding(1, 1, 1, 1);
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        Glide.with(context).load(list.get(mPosition)).into(imageView);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        Glide.with(context).load(list.get(mPosition))
+                .fitCenter()
+                .into(imageView);
         ((ViewPager) ssContainer).addView(imageView, 0);
         return imageView;
     }

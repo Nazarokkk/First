@@ -52,7 +52,8 @@ public class PhotoAdapter extends BaseAdapter {
         }
 
         ImageView imageView = (ImageView) grid.findViewById(R.id.image);
-        Glide.with(mContext).load(imageList.get(position).getPhoto_604()).into(imageView);
+        Glide.with(mContext).load(imageList.get(position).getPhoto_604())
+                .into(imageView);
 
         return grid;
     }

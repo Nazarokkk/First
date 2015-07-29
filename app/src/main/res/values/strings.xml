@@ -2,7 +2,6 @@
     <string name="app_name">Summer Camp Beta</string>
     <string name="search_hint">Search</string>
 
-    <string name="action_settings">Settings</string>
 
-    <color name="toolbar_color">#1D4CBB</color>>
+    <color name="toolbar_color">#4E729A</color>>
 </resources>

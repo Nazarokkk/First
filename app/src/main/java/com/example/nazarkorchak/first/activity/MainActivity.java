@@ -2,17 +2,14 @@ package com.example.nazarkorchak.first.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.AlbumEvent;
@@ -74,15 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
-        SearchManager searchManager = (SearchManager) MainActivity.this.getSystemService(Context.SEARCH_SERVICE);
-
-        SearchView searchView = null;
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
-        }
-        if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(MainActivity.this.getComponentName()));
-        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -91,13 +79,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEvent(AlbumEvent event) {
-        getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new AlbumFragment())
+        getFragmentManager().beginTransaction()
+                .replace(R.id.FragmentContainer, new AlbumFragment())
                 .addToBackStack(null)
                 .commit();
+
     }
 
     public void onEvent(PhotoEvent event) {
-        getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new PhotoFrament())
+        getFragmentManager().beginTransaction()
+                .replace(R.id.FragmentContainer, new PhotoFrament())
                 .addToBackStack(null)
                 .commit();
     }
@@ -108,5 +99,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStackImmediate();
+            return;
+        }
+        super.onBackPressed();
 
+    }
 }

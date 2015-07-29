@@ -48,7 +48,6 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 EventBus.getDefault().post(new AlbumEvent(friendList.get(position).getUser_id()));
-               // Toast.makeText(context, "#" + position + " - " + friendList.get(position).getUser_id() + " (Long click)", Toast.LENGTH_SHORT).show();
             }
         });
 
