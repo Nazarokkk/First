@@ -6,16 +6,15 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
 
 import com.example.nazarkorchak.first.Adapters.FriendsListAdapter;
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.FriendsEvent;
 import com.example.nazarkorchak.first.events.LoadFriendsData;
+import com.example.nazarkorchak.first.events.SendSearchQueryEvent;
 import com.example.nazarkorchak.first.model.Friend;
 
 import java.util.ArrayList;
@@ -28,20 +27,23 @@ public class FriendsListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+    private FriendsListAdapter mSearchAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<Friend> friendList = new ArrayList<Friend>();
+    private List<Friend> searchFriendList = new ArrayList<Friend>();
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         EventBus.getDefault().register(this);
     }
-        @Override
-        public void onStart () {
-            super.onStart();
-            EventBus.getDefault().post(new FriendsEvent());
-        }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().post(new FriendsEvent());
+    }
 
     public void onEventMainThread(LoadFriendsData event) {
         if (event.friendList != null) {
@@ -49,6 +51,32 @@ public class FriendsListFragment extends Fragment {
             // TODO change data in adapter
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void onEventAsync(SendSearchQueryEvent event) {
+        if (event.message != null) {
+
+            searchFriendList.clear();
+
+            for (int i = 0; i < friendList.size(); i++) {
+                if (friendList.get(i).getFirst_name().contains(event.message) || friendList.get(i).getLast_name().contains(event.message)) {
+
+                    searchFriendList.add(friendList.get(i));
+
+                }
+            }
+
+            mSearchAdapter = new FriendsListAdapter(searchFriendList, getActivity());
+        }
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mRecyclerView.setAdapter(mSearchAdapter);
+            }
+        });
+
+
     }
 
     @Override
@@ -62,8 +90,10 @@ public class FriendsListFragment extends Fragment {
         mAdapter = new FriendsListAdapter(friendList, getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
+
         return view;
     }
+
 
     @Override
     public void onDestroy() {

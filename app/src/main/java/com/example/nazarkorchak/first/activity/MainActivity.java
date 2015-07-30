@@ -2,19 +2,22 @@ package com.example.nazarkorchak.first.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.AlbumEvent;
 import com.example.nazarkorchak.first.events.MessageEvent;
 import com.example.nazarkorchak.first.events.PhotoEvent;
+import com.example.nazarkorchak.first.events.SendSearchQueryEvent;
 import com.example.nazarkorchak.first.fragments.AlbumFragment;
 import com.example.nazarkorchak.first.fragments.FriendsListFragment;
 import com.example.nazarkorchak.first.fragments.PhotoFrament;
@@ -61,17 +64,37 @@ public class MainActivity extends AppCompatActivity {
             setSupportActionBar(mActionBarToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
 
-        return super.onCreateOptionsMenu(menu);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+               // EventBus.getDefault().post(new SendSearchQueryEvent(query));
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                EventBus.getDefault().post(new SendSearchQueryEvent(newText));
+                return true;
+            }
+        });
+        return true;
     }
 
     public void onEvent(MessageEvent event) {
