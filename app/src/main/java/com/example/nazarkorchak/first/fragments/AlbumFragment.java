@@ -14,6 +14,7 @@ import com.example.nazarkorchak.first.Adapters.AlbumsAdapter;
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.LoadAlbumData;
 import com.example.nazarkorchak.first.events.PhotoEvent;
+import com.example.nazarkorchak.first.inteface.ShowSearchItem;
 import com.example.nazarkorchak.first.model.AlbumImage;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 
-public class AlbumFragment extends Fragment {
+public class AlbumFragment extends Fragment implements ShowSearchItem {
 
     public List<AlbumImage> imageList = new ArrayList<AlbumImage>();
 

@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.AlbumEvent;
@@ -22,6 +25,7 @@ import com.example.nazarkorchak.first.fragments.AlbumFragment;
 import com.example.nazarkorchak.first.fragments.FriendsListFragment;
 import com.example.nazarkorchak.first.fragments.PhotoFrament;
 import com.example.nazarkorchak.first.fragments.WebFragment;
+import com.example.nazarkorchak.first.inteface.ShowSearchItem;
 
 import de.greenrobot.event.EventBus;
 
@@ -74,42 +78,75 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
+        MenuItem search = menu.findItem(R.id.action_search);
+
+        SearchView searchView=
                 (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-               // EventBus.getDefault().post(new SendSearchQueryEvent(query));
-                return true;
-            }
+        Fragment currentFragment = this.getFragmentManager().findFragmentById(R.id.FragmentContainer);
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                EventBus.getDefault().post(new SendSearchQueryEvent(newText));
-                return true;
-            }
-        });
+        if(currentFragment instanceof ShowSearchItem) {
+
+
+            search.setVisible(true);
+            Log.e("fsaf","Show");
+
+            SearchManager searchManager =
+                    (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            searchView.setSearchableInfo(
+                    searchManager.getSearchableInfo(getComponentName()));
+
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    // EventBus.getDefault().post(new SendSearchQueryEvent(query));
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    EventBus.getDefault().post(new SendSearchQueryEvent(newText));
+                    return true;
+                }
+            });
+        }
+        else{
+            search.setVisible(false);
+            Log.e("fsaf", "NoShow");
+        }
+
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
     public void onEvent(MessageEvent event) {
+        invalidateOptionsMenu();
         getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
     }
 
     public void onEvent(AlbumEvent event) {
+        invalidateOptionsMenu();
         getFragmentManager().beginTransaction()
                 .replace(R.id.FragmentContainer, new AlbumFragment())
                 .addToBackStack(null)
                 .commit();
-
     }
 
     public void onEvent(PhotoEvent event) {
+        invalidateOptionsMenu();
         getFragmentManager().beginTransaction()
                 .replace(R.id.FragmentContainer, new PhotoFrament())
                 .addToBackStack(null)

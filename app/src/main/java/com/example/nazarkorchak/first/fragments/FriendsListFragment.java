@@ -15,6 +15,7 @@ import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.FriendsEvent;
 import com.example.nazarkorchak.first.events.LoadFriendsData;
 import com.example.nazarkorchak.first.events.SendSearchQueryEvent;
+import com.example.nazarkorchak.first.inteface.ShowSearchItem;
 import com.example.nazarkorchak.first.model.Friend;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 
-public class FriendsListFragment extends Fragment {
+public class FriendsListFragment extends Fragment implements ShowSearchItem {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -78,6 +79,7 @@ public class FriendsListFragment extends Fragment {
 
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
