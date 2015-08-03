@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.example.nazarkorchak.first.Adapters.AlbumsAdapter;
 import com.example.nazarkorchak.first.R;

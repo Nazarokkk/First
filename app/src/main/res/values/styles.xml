@@ -11,4 +11,15 @@
         <item name="searchIcon">@drawable/ic_action_search</item>
     </style>
 
+    <style name="MyAppTheme" parent="Widget.AppCompat.ActionBar">
+        <!-- Customize your theme here. -->
+        <item name="theme">@style/TextStyleTheme</item>
+        <item name="android:background">@drawable/action_bar_bg</item>
+    </style>
+
+    <style name="TextStyleTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <!-- Text Color -->
+        <item name="android:textColorPrimary">@color/actionMenuTextColor</item>
+    </style>
+
 </resources>

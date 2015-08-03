@@ -72,7 +72,6 @@ public class WebFragment extends Fragment {
                 editor.commit();
 
 
-
                 TokenHolder.setUserID(getActivity(), userId);
                 TokenHolder.setToken(getActivity(), accessToken);
 

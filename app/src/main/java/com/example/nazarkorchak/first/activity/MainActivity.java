@@ -13,8 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.AlbumEvent;
@@ -80,16 +78,16 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem search = menu.findItem(R.id.action_search);
 
-        SearchView searchView=
+        SearchView searchView =
                 (SearchView) menu.findItem(R.id.action_search).getActionView();
 
         Fragment currentFragment = this.getFragmentManager().findFragmentById(R.id.FragmentContainer);
 
-        if(currentFragment instanceof ShowSearchItem) {
+        if (currentFragment instanceof ShowSearchItem) {
 
 
             search.setVisible(true);
-            Log.e("fsaf","Show");
+            Log.e("fsaf", "Show");
 
             SearchManager searchManager =
                     (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -109,8 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             });
-        }
-        else{
+        } else {
             search.setVisible(false);
             Log.e("fsaf", "NoShow");
         }
@@ -129,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
     public void onEvent(MessageEvent event) {

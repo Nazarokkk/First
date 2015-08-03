@@ -14,7 +14,6 @@ import com.example.nazarkorchak.first.Adapters.PhotoAdapter;
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.activity.FullScreenPhotoActivity;
 import com.example.nazarkorchak.first.events.LoadPhotoData;
-import com.example.nazarkorchak.first.events.SendImagesEvent;
 import com.example.nazarkorchak.first.model.Photo;
 
 import java.util.ArrayList;
@@ -67,8 +66,7 @@ public class PhotoFrament extends Fragment {
                 Intent intent = new Intent(getActivity(), FullScreenPhotoActivity.class);
 
                 ArrayList<String> list = new ArrayList<String>();
-                for (int i = 0; i < imageList.size(); i++)
-                {
+                for (int i = 0; i < imageList.size(); i++) {
                     list.add(imageList.get(i).getPhoto_604());
                 }
 

@@ -5,4 +5,9 @@
 
     <color name="toolbar_color">#4E729A</color>
     <color name="color_primary_dark">#4E729A</color>
+
+
+    <color name="start_gradient">#75000000</color>
+    <color name="end_gradient">#50E9EDF1</color>
+    <color name="actionMenuTextColor">#FFFFFF</color>
 </resources>

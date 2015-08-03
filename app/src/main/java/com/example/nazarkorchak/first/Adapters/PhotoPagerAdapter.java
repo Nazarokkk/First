@@ -6,17 +6,21 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.nazarkorchak.first.events.ShowToolBarEvent;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 
 public class PhotoPagerAdapter extends PagerAdapter {
 
-    Context context;
-    List<String> list;
-
+    private Context context;
+    private List<String> list;
+    public boolean isShowToolBar = false;
 
     public PhotoPagerAdapter(Context context, List<String> list) {
         this.context = context;
@@ -32,6 +36,15 @@ public class PhotoPagerAdapter extends PagerAdapter {
                 .fitCenter()
                 .into(imageView);
         ((ViewPager) ssContainer).addView(imageView, 0);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShowToolBar = !isShowToolBar;
+                EventBus.getDefault().post(new ShowToolBarEvent(isShowToolBar));
+            }
+        });
+
         return imageView;
     }
 
