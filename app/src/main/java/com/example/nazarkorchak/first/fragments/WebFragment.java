@@ -39,6 +39,7 @@ public class WebFragment extends Fragment {
         myWebView.loadUrl(mURL.trim());
 
 
+
         return view;
     }
 

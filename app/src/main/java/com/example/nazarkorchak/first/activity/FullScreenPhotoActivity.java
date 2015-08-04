@@ -11,9 +11,7 @@ import android.view.MenuItem;
 
 import com.example.nazarkorchak.first.Adapters.PhotoPagerAdapter;
 import com.example.nazarkorchak.first.R;
-import com.example.nazarkorchak.first.events.PhotoEvent;
 import com.example.nazarkorchak.first.events.ShowToolBarEvent;
-import com.example.nazarkorchak.first.fragments.PhotoFrament;
 
 import java.util.ArrayList;
 

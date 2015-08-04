@@ -76,8 +76,6 @@ public class FriendsListFragment extends Fragment implements ShowSearchItem {
                 mRecyclerView.setAdapter(mSearchAdapter);
             }
         });
-
-
     }
 
 

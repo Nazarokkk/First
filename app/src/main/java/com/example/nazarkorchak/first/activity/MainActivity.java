@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (currentFragment instanceof ShowSearchItem) {
 
-
             search.setVisible(true);
             Log.e("fsaf", "Show");
 
@@ -104,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onQueryTextChange(String newText) {
                     EventBus.getDefault().post(new SendSearchQueryEvent(newText));
+                    newText = null;
                     return true;
                 }
             });
@@ -129,24 +129,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onEvent(MessageEvent event) {
-        invalidateOptionsMenu();
         getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
+        invalidateOptionsMenu();
     }
 
     public void onEvent(AlbumEvent event) {
-        invalidateOptionsMenu();
         getFragmentManager().beginTransaction()
                 .replace(R.id.FragmentContainer, new AlbumFragment())
                 .addToBackStack(null)
                 .commit();
+        invalidateOptionsMenu();
     }
 
     public void onEvent(PhotoEvent event) {
-        invalidateOptionsMenu();
         getFragmentManager().beginTransaction()
                 .replace(R.id.FragmentContainer, new PhotoFrament())
                 .addToBackStack(null)
                 .commit();
+        invalidateOptionsMenu();
     }
 
     @Override

@@ -45,6 +45,7 @@ public class PhotoPagerAdapter extends PagerAdapter {
             }
         });
 
+
         return imageView;
     }
 
@@ -61,6 +62,7 @@ public class PhotoPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View View, Object Object) {
+
         return View == ((ImageView) Object);
     }
 }
