@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +22,6 @@ import com.example.nazarkorchak.first.fragments.AlbumFragment;
 import com.example.nazarkorchak.first.fragments.FriendsListFragment;
 import com.example.nazarkorchak.first.fragments.PhotoFrament;
 import com.example.nazarkorchak.first.fragments.WebFragment;
-import com.example.nazarkorchak.first.inteface.ShowSearchItem;
 
 import de.greenrobot.event.EventBus;
 
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (mActionBarToolbar != null) {
             setSupportActionBar(mActionBarToolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
     }
@@ -76,17 +73,8 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
-        MenuItem search = menu.findItem(R.id.action_search);
-
         SearchView searchView =
                 (SearchView) menu.findItem(R.id.action_search).getActionView();
-
-        Fragment currentFragment = this.getFragmentManager().findFragmentById(R.id.FragmentContainer);
-
-        if (currentFragment instanceof ShowSearchItem) {
-
-            search.setVisible(true);
-            Log.e("fsaf", "Show");
 
             SearchManager searchManager =
                     (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -107,10 +95,6 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             });
-        } else {
-            search.setVisible(false);
-            Log.e("fsaf", "NoShow");
-        }
 
         return true;
     }
@@ -164,4 +148,5 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
 
     }
+
 }

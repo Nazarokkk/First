@@ -4,6 +4,7 @@ package com.example.nazarkorchak.first.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -63,7 +64,6 @@ public class FriendsListFragment extends Fragment implements ShowSearchItem {
                 if (friendList.get(i).getFirst_name().contains(event.message) || friendList.get(i).getLast_name().contains(event.message)) {
 
                     searchFriendList.add(friendList.get(i));
-
                 }
             }
 
@@ -90,6 +90,12 @@ public class FriendsListFragment extends Fragment implements ShowSearchItem {
         mAdapter = new FriendsListAdapter(friendList, getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
+        friendList.clear();
+
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().show();
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         return view;
     }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +104,13 @@ public class AlbumFragment extends Fragment implements ShowSearchItem {
                 EventBus.getDefault().post(new PhotoEvent(imageList.get(position).getOwner_id(), imageList.get(position).getId()));
             }
         });
+        
+        imageList.clear();
 
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().show();
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         return view;
     }
