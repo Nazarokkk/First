@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void onEvent(MessageEvent event) {
         getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
         invalidateOptionsMenu();
