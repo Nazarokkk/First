@@ -104,8 +104,8 @@ public class AlbumFragment extends Fragment implements ShowSearchItem {
                 EventBus.getDefault().post(new PhotoEvent(imageList.get(position).getOwner_id(), imageList.get(position).getId()));
             }
         });
-        
-        imageList.clear();
+
+        searchImageList.clear();
 
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
