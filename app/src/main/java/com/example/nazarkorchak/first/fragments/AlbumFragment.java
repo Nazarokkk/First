@@ -74,7 +74,7 @@ public class AlbumFragment extends Fragment implements ShowSearchItem {
                 }
             }
 
-            mSearchAdapter = new AlbumsAdapter(getActivity(),searchImageList);
+            mSearchAdapter = new AlbumsAdapter(getActivity(), searchImageList);
         }
 
         getActivity().runOnUiThread(new Runnable() {
@@ -114,7 +114,6 @@ public class AlbumFragment extends Fragment implements ShowSearchItem {
 
         return view;
     }
-
 
 
     @Override

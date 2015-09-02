@@ -8,21 +8,24 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.example.nazarkorchak.first.R;
+import com.example.nazarkorchak.first.TouchImageView;
 import com.example.nazarkorchak.first.events.ShareImageEvent;
-import com.example.nazarkorchak.first.events.ShowToolBarEvent;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import de.greenrobot.event.EventBus;
 
@@ -32,7 +35,7 @@ public class PhotoPagerAdapter extends PagerAdapter {
     private Context context;
     private List<String> list;
     public boolean isShowToolBar = false;
-    ImageView imageView;
+    TouchImageView imageView;
 
     public PhotoPagerAdapter(Context context, List<String> list) {
         this.context = context;
@@ -41,20 +44,38 @@ public class PhotoPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup ssContainer, int mPosition) {
-        imageView = new ImageView(context);
+
+        imageView = new TouchImageView(context);
         imageView.setPadding(1, 1, 1, 1);
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        Glide.with(context).load(list.get(mPosition))
+        //imageView.setImageResource(R.drawable.img);
+
+//        Glide.with(context).load(list.get(mPosition))
+//                .asBitmap()
+//                .fitCenter()
+//                .into(imageView);
+
+        Glide
+                .with(context)
+                .load(list.get(mPosition))
                 .asBitmap()
-                .fitCenter()
-                .into(imageView);
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                        imageView.setImageBitmap(bitmap);
+                    }
+                });
+
+
         ((ViewPager) ssContainer).addView(imageView, 0);
+
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isShowToolBar = !isShowToolBar;
-                EventBus.getDefault().post(new ShareImageEvent(getLocalBitmapUri((ImageView) v),isShowToolBar));
+                EventBus.getDefault().post(new ShareImageEvent(getLocalBitmapUri((ImageView) v), isShowToolBar));
             }
         });
 

@@ -25,7 +25,9 @@ public class WebFragment extends Fragment {
 
 
     final String mURL = "https://oauth.vk.com/authorize?client_id=4980525&redirect_uri=https://oauth.vk.com/blank.html&scope=friends,photos,offline&revoke=1&display=mobile&response_type=token ";
-    final String REDIRECT_URI = "access_token";
+    final String ACCESS_TOKEN = "access_token";
+    final String EXPIRES_IN = "expires_in";
+    final String USER_ID = "user_id";
 
 
     @Override
@@ -53,16 +55,16 @@ public class WebFragment extends Fragment {
 
             Log.d(TAG, url);
 
-            if (url.contains(REDIRECT_URI)) {
+            if (url.contains(ACCESS_TOKEN)) {
 
                 url = url.replace("#", "?");
 
                 Uri token_uri = Uri.parse(url);
 
 
-                String accessToken = token_uri.getQueryParameter("access_token");
-                String expiresIn = token_uri.getQueryParameter("expires_in");
-                String userId = token_uri.getQueryParameter("user_id");
+                String accessToken = token_uri.getQueryParameter(ACCESS_TOKEN);
+                String expiresIn = token_uri.getQueryParameter(EXPIRES_IN);
+                String userId = token_uri.getQueryParameter(USER_ID);
 
                 Log.d(TAG, "TOKEN = " + accessToken);
                 Log.d(TAG, "TIME = " + expiresIn);
@@ -71,9 +73,9 @@ public class WebFragment extends Fragment {
 
                 SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("access_token", accessToken); // TODO extract preference KEYs to constants
-                editor.putString("expires_in", expiresIn);
-                editor.putString("user_id", userId);
+                editor.putString(ACCESS_TOKEN, accessToken);
+                editor.putString(EXPIRES_IN, expiresIn);
+                editor.putString(USER_ID, userId);
                 editor.commit();
 
 

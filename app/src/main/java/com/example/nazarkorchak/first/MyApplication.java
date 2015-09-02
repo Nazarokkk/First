@@ -1,7 +1,6 @@
 package com.example.nazarkorchak.first;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.example.nazarkorchak.first.api.VkApi;
 import com.example.nazarkorchak.first.events.AlbumEvent;
@@ -53,7 +52,6 @@ public class MyApplication extends Application {
     public void onEventAsync(FriendsEvent event) {
 
         // TODO Use params from event
-        // request template https://api.vk.com/method/friends.get?user_id=13140554&fields=photo_100
         Map<String, String> mMap = new HashMap<>();
 
 

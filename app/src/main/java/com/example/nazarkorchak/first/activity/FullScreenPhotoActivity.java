@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import com.example.nazarkorchak.first.Adapters.PhotoPagerAdapter;
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.ShareImageEvent;
-import com.example.nazarkorchak.first.events.ShowToolBarEvent;
 
 import java.util.ArrayList;
 
@@ -76,7 +75,7 @@ public class FullScreenPhotoActivity extends AppCompatActivity {
             setShareIntent(shareIntent);
         }
 
-        if (event.isShowToolBar == true) {
+        if (event.isShowToolBar) {
             getSupportActionBar().show();
         } else {
             getSupportActionBar().hide();
@@ -95,7 +94,6 @@ public class FullScreenPhotoActivity extends AppCompatActivity {
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 
-
         return true;
     }
 
@@ -107,7 +105,6 @@ public class FullScreenPhotoActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }

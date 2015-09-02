@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.example.nazarkorchak.first.R;
 import com.example.nazarkorchak.first.events.AlbumEvent;
@@ -30,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
     //final String getFriends = "https://api.vk.com/method/friends.get?user_id=134487854&order=random&fields=first_name,last_name,photo_100&version=5.34";
     //final String getAlbums = "https://api.vk.com/method/photos.getAlbums?owner_id=134487854&need_system=1&need_covers=1&v=5.34";
     //final String getPhotos = "https://api.vk.com/method/photos.get?owner_id=134487854&album_id=-6&access_token=acc411f13c8a4680a56509a0e38721e5b380439866f4c58a6bdf8b50b4fb896a6779164e4e353816ba884&v=5.34";
+    //final String getPhotos = "https://api.vk.com/method/users.get?fields=sex,bdate,city,country,photo_50,photo_100,photo_200_orig,photo_200,photo_400_orig,photo_max&access_token=acc411f13c8a4680a56509a0e38721e5b380439866f4c58a6bdf8b50b4fb896a6779164e4e353816ba884&v=5.34";
 
     FragmentManager fragmentManager = getFragmentManager();
     Fragment fragment;
-
+    boolean isTablet;
 
     @Override
     public void onStart() {
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
@@ -64,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
             setSupportActionBar(mActionBarToolbar);
         }
 
+        FrameLayout fragManager = (FrameLayout)findViewById(R.id.FragmentContainer1);
+
+        isTablet = (fragManager != null);
+        Log.d("niki","is tablet = "+ isTablet);
     }
 
 
@@ -84,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    // EventBus.getDefault().post(new SendSearchQueryEvent(query));
                     return true;
                 }
 
@@ -112,24 +119,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEvent(MessageEvent event) {
-        getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
-        invalidateOptionsMenu();
+            getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
+            invalidateOptionsMenu();
     }
 
     public void onEvent(AlbumEvent event) {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.FragmentContainer, new AlbumFragment())
-                .addToBackStack(null)
-                .commit();
-        invalidateOptionsMenu();
+        if(isTablet){
+            getFragmentManager().beginTransaction().replace(R.id.FragmentContainer1, new AlbumFragment()).commit();
+            invalidateOptionsMenu();
+        }
+        else {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.FragmentContainer, new AlbumFragment())
+                    .addToBackStack(null)
+                    .commit();
+            invalidateOptionsMenu();
+        }
     }
 
     public void onEvent(PhotoEvent event) {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.FragmentContainer, new PhotoFrament())
-                .addToBackStack(null)
-                .commit();
-        invalidateOptionsMenu();
+        if(isTablet){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.FragmentContainer, new PhotoFrament())
+                    .addToBackStack(null)
+                    .commit();
+            invalidateOptionsMenu();
+        }
+        else {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.FragmentContainer, new PhotoFrament())
+                    .addToBackStack(null)
+                    .commit();
+            invalidateOptionsMenu();
+        }
     }
 
     @Override
