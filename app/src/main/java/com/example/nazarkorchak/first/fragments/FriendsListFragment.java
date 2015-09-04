@@ -97,6 +97,7 @@ public class FriendsListFragment extends Fragment implements ShowSearchItem {
         activity.getSupportActionBar().show();
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        searchFriendList.clear();
         return view;
     }
 

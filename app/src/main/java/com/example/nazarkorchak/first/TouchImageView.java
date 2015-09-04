@@ -99,6 +99,16 @@ public class TouchImageView extends ImageView {
         sharedConstructing(context);
     }
 
+    private void stopInterceptEvent()
+    {
+        getParent().requestDisallowInterceptTouchEvent(true);
+    }
+
+    private void startInterceptEvent()
+    {
+        getParent().requestDisallowInterceptTouchEvent(false);
+    }
+
     private void sharedConstructing(Context context) {
         super.setClickable(true);
         this.context = context;

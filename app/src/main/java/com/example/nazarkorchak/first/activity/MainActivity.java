@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +23,8 @@ import com.example.nazarkorchak.first.fragments.AlbumFragment;
 import com.example.nazarkorchak.first.fragments.FriendsListFragment;
 import com.example.nazarkorchak.first.fragments.PhotoFrament;
 import com.example.nazarkorchak.first.fragments.WebFragment;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
 
 import de.greenrobot.event.EventBus;
 
@@ -68,10 +69,16 @@ public class MainActivity extends AppCompatActivity {
             setSupportActionBar(mActionBarToolbar);
         }
 
-        FrameLayout fragManager = (FrameLayout)findViewById(R.id.FragmentContainer1);
+        FrameLayout fragManager = (FrameLayout) findViewById(R.id.FragmentContainer1);
 
         isTablet = (fragManager != null);
-        Log.d("niki","is tablet = "+ isTablet);
+
+//        Drawer result = new DrawerBuilder()
+//                .withActivity(this)
+//                .withToolbar(mActionBarToolbar)
+//                .withDisplayBelowStatusBar(true)
+//                .withActionBarDrawerToggleAnimated(true)
+//                .build();
     }
 
 
@@ -84,24 +91,24 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchView =
                 (SearchView) menu.findItem(R.id.action_search).getActionView();
 
-            SearchManager searchManager =
-                    (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            searchView.setSearchableInfo(
-                    searchManager.getSearchableInfo(getComponentName()));
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
 
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return true;
-                }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
 
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    EventBus.getDefault().post(new SendSearchQueryEvent(newText));
-                    newText = null;
-                    return true;
-                }
-            });
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                EventBus.getDefault().post(new SendSearchQueryEvent(newText));
+                newText = null;
+                return true;
+            }
+        });
 
         return true;
     }
@@ -119,16 +126,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEvent(MessageEvent event) {
-            getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
-            invalidateOptionsMenu();
+        getFragmentManager().beginTransaction().replace(R.id.FragmentContainer, new FriendsListFragment()).commit();
+        invalidateOptionsMenu();
     }
 
     public void onEvent(AlbumEvent event) {
-        if(isTablet){
+        if (isTablet) {
             getFragmentManager().beginTransaction().replace(R.id.FragmentContainer1, new AlbumFragment()).commit();
             invalidateOptionsMenu();
-        }
-        else {
+        } else {
             getFragmentManager().beginTransaction()
                     .replace(R.id.FragmentContainer, new AlbumFragment())
                     .addToBackStack(null)
@@ -138,14 +144,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEvent(PhotoEvent event) {
-        if(isTablet){
+        if (isTablet) {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.FragmentContainer, new PhotoFrament())
+                    .replace(R.id.FragmentContainer1, new PhotoFrament())
                     .addToBackStack(null)
                     .commit();
             invalidateOptionsMenu();
-        }
-        else {
+        } else {
             getFragmentManager().beginTransaction()
                     .replace(R.id.FragmentContainer, new PhotoFrament())
                     .addToBackStack(null)

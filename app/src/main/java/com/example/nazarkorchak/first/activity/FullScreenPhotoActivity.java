@@ -60,6 +60,7 @@ public class FullScreenPhotoActivity extends AppCompatActivity {
     }
 
 
+
     private void setShareIntent(Intent shareIntent) {
         mShareActionProvider.setShareIntent(shareIntent);
     }

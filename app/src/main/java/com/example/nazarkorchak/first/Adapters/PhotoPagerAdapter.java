@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestListener;
@@ -35,7 +36,6 @@ public class PhotoPagerAdapter extends PagerAdapter {
     private Context context;
     private List<String> list;
     public boolean isShowToolBar = false;
-    TouchImageView imageView;
 
     public PhotoPagerAdapter(Context context, List<String> list) {
         this.context = context;
@@ -45,33 +45,16 @@ public class PhotoPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup ssContainer, int mPosition) {
 
-        imageView = new TouchImageView(context);
-        imageView.setPadding(1, 1, 1, 1);
-        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        //imageView.setImageResource(R.drawable.img);
+        final TouchImageView img = new TouchImageView(ssContainer.getContext());
+        Glide.with(context).load(list.get(mPosition)).asBitmap().into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                img.setImageBitmap(resource);
+            }
+        });
+        ssContainer.addView(img, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-//        Glide.with(context).load(list.get(mPosition))
-//                .asBitmap()
-//                .fitCenter()
-//                .into(imageView);
-
-        Glide
-                .with(context)
-                .load(list.get(mPosition))
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
-                        imageView.setImageBitmap(bitmap);
-                    }
-                });
-
-
-        ((ViewPager) ssContainer).addView(imageView, 0);
-
-
-
-        imageView.setOnClickListener(new View.OnClickListener() {
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isShowToolBar = !isShowToolBar;
@@ -79,7 +62,8 @@ public class PhotoPagerAdapter extends PagerAdapter {
             }
         });
 
-        return imageView;
+        return img;
+
     }
 
     public Uri getLocalBitmapUri(ImageView v) {
@@ -121,4 +105,6 @@ public class PhotoPagerAdapter extends PagerAdapter {
 
         return View == ((ImageView) Object);
     }
+
+
 }

@@ -4,6 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:windowActionBar">false</item>
+
     </style>
 
     <style name="AppSearchViewStyle" parent="Widget.AppCompat.SearchView">
